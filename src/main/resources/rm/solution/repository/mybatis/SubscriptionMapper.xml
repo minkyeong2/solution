@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rm.solution.repository.mybatis.SubscriptionMapper">
+
+<!--    <insert id="addSubscription" parameterType="rm.solution.domain.subscription.Subscription">-->
+<!--        INSERT INTO subscription (member_id, member_count, service_type, company, phone_num, address)-->
+<!--        VALUES (-->
+<!--        #{memberId},-->
+<!--        #{memberCount},-->
+<!--        #{serviceType.displayName},-->
+<!--        #{company},-->
+<!--        #{phoneNum},-->
+<!--        #{address}-->
+<!--        )-->
+<!--    </insert>-->
+
+    <insert id="addSubscription" parameterType="rm.solution.domain.subscription.Subscription">
+        INSERT INTO Subscription (SERVICE_TYPE, SUBSCRIPTION_STATUS_ID, MEMBER_COUNT, COMPANY, ADDRESS, PHONE_NUM, MEMBER_ID)
+        VALUES (
+        #{serviceType},
+        #{subscriptionStatus.id},
+        #{memberCount},
+        <if test="company != null">#{company}</if>,
+        <if test="address != null">#{address}</if>,
+        <if test="phoneNum != null">#{phoneNum}</if>,
+        #{memberId}
+        )
+    </insert>
+
+
+    <select id="findSubscriptionByMemberId" resultType="rm.solution.domain.subscription.Subscription">
+        SELECT * FROM subscription WHERE member_id = #{memberId}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="rm.solution.repository.mybatis.SubscriptionStatusMapper">
+    <insert id="save" parameterType="rm.solution.domain.subscription.SubscriptionStatus">
+        INSERT INTO Subscription_Status (TOTAL_STORAGE, USED_STORAGE, REMAINING_STORAGE, SUB_START_DATE, SUB_END_DATE,SERVICE_TYPE)
+        VALUES (
+        #{totalStorage},
+        #{usedStorage},
+        #{remainingStorage},
+        #{subStartDate},
+        #{subEndDate},
+        #{serviceType}
+        )
+    </insert>
+
+    <update id="extend" parameterType="rm.solution.domain.subscription.SubscriptionStatus">
+        UPDATE Subscription_Status
+        SET total_storage = #{totalStorage},
+        used_storage = #{usedStorage},
+        remaining_storage = #{remainingStorage},
+        sub_start_date = #{subStartDate},
+        sub_end_date = #{subEndDate}
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="findSubscriptionById" resultType="rm.solution.domain.subscription.SubscriptionStatus">
+
+        SELECT * FROM subscription WHERE id = #{id};
+    </select>
+
+</mapper>

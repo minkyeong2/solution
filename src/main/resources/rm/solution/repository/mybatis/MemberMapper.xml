@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rm.solution.repository.mybatis.MemberMapper" >
+    <insert id="add" parameterType="rm.solution.domain.member.Member" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO member (MEMBER_ID, PASSWORD, NAME, EMAIL, CREATED_AT)
+        VALUES (#{memberId}, #{password}, #{name}, #{email},  CURRENT_TIMESTAMP)
+    </insert>
+
+    <select id="findByMemberId" resultType="member">
+        SELECT MEMBER_ID, PASSWORD
+        FROM member
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="findLoginResponseByMemberId" resultType="rm.solution.dto.LoginResponseDTO">
+        SELECT ID,MEMBER_Id, NAME, EMAIL, CREATED_AT
+        FROM member
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+
+</mapper>
